@@ -9,18 +9,19 @@ export default class Previewer extends Component {
 
     this.updateValue = this.updateValue.bind(this);
   }
-  updateValue(e) {
-    var val = e.target.value;
-    this.setState = { value: val };
+  updateValue(val) {
+    this.setState({ value: val });
   }
   markup(text) {
     var markup = marked(text, { sanitize: true });
-    return { __html: markup};
+    return { __html: markup}
   }
   render() {
     return (
       <div className='row'>
-        <Markdown className='col-md-6' value={this.state.value} updateValue={this.updateValue} onChange={this.updateValue}/>
+        <div className='col-md-6'>
+          <Markdown value={this.state.value} updateValue={this.updateValue} />
+        </div>
         <div className='col-md-6'>
           <span dangerouslySetInnerHTML={this.markup(this.state.value)} />
         </div>
